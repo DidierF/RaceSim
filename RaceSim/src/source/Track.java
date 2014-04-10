@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 class Track{
 	public String location;
 	private BufferedImage image;
+	
+	//TODO: define track bounds, so drivers can turn by themselves
 
 	public Track(String trackLocation){
 		try {

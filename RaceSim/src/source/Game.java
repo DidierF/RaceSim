@@ -18,8 +18,8 @@ public class Game extends Canvas implements Runnable{
 	private boolean gameRunning = true;
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private Track track = new Track("src/source/Pictures/PistaRectangular_3.jpg");
-	private int startX = 0;
-	private int startY = 0;
+	private int startX = 300;
+	private int startY = 500;
 	
 	public Game(){
 		JFrame container = new JFrame();
@@ -43,13 +43,14 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	private void setupGame(){
-		String carLoc = "";
-		Driver drv;
-		for(int i = 1; i <= 10; i++){
-			carLoc = "src/source/Pictures/carro" + i + ".gif";
-			drv = new Driver(new Car(carLoc, startX, startY));
-			drivers.add(drv);
-		}
+		String carLoc = "src/source/Pictures/carro2.gif";
+		Driver drv = new Driver(new Car(carLoc, startX, startY));
+		drivers.add(drv);
+//		for(int i = 1; i <= 10; i++){
+//			carLoc = "src/source/Pictures/carro" + i + ".gif";
+//			drv = new Driver(new Car(carLoc, startX, startY));
+//			drivers.add(drv);
+//		}
 	}
 	
 	public void gameLoop(){
@@ -62,7 +63,7 @@ public class Game extends Canvas implements Runnable{
 			
 			/**
 			 * Draws a different car each time to test that they loaded correctly
-			 * */
+			 */
 			for(Driver drv: drivers){
 				g.drawImage(drv.getCar().getFace(), null, drv.getCar().getPosX(), drv.getCar().getPosY());
 			}
@@ -71,7 +72,7 @@ public class Game extends Canvas implements Runnable{
 			strategy.show();
 			
 			try {
-				Thread.sleep(100);
+				Thread.sleep(50);
 			} catch (InterruptedException e){
 				e.printStackTrace();
 			}
