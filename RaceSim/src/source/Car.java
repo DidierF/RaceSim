@@ -17,7 +17,11 @@ class Car{
 	private int direction = EAST;
 	private int[] position = {0,0}; //Car's current position.
 	private double speed = 1; //Car's speed.
-	private int[][] bounds = new int[2][2];
+	private int topBound;
+	private int rightBound;
+	private int leftBound;
+	private int botBound;
+	
 	public Car(String newFace, int x, int y){
 		setFace(newFace);
 		position[0] = x;
@@ -29,10 +33,10 @@ class Car{
 	 * 
 	 */
 	private void setBounds() {
-		bounds[0][0] = position[0];
-		bounds[0][1] = position[0] + face.getWidth();
-		bounds[1][0] = position[1];
-		bounds[1][1] = position[1] + face.getHeight();
+		leftBound = position[0];
+		rightBound = position[0] + face.getWidth();
+		topBound = position[1];
+		botBound = position[1] + face.getHeight();
 	}
 
 	public double getSpeed(){
@@ -86,5 +90,21 @@ class Car{
 	
 	public int getPosY(){
 		return position[1];
+	}
+	
+	public int getTopBound(){
+		return topBound;
+	}
+	
+	public int getBotBound(){
+		return botBound;
+	}
+	
+	public int getLeftBound(){
+		return leftBound;
+	}
+	
+	public int getRightBound(){
+		return rightBound;
 	}
 }
