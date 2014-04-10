@@ -17,7 +17,7 @@ public class Game extends Canvas implements Runnable{
 	private BufferStrategy strategy;
 	private boolean gameRunning = true;
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
-	private Track track = new Track("src/source/Pictures/PistaRectangular_3.jpg");
+	private Track track = new Track("src/source/Pictures/PistaRectangular_4.jpg", new Dimension(670, 550), new Dimension(460, 390));
 	private int startX = 300;
 	private int startY = 500;
 	
@@ -26,10 +26,10 @@ public class Game extends Canvas implements Runnable{
 		container.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = (JPanel) container.getContentPane();
-		panel.setPreferredSize(new Dimension(800, 600));
+		panel.setPreferredSize(new Dimension(track.getWidth(), track.getHeight()));
 		panel.setLayout(null);
 		
-		setBounds(0,0,800,600);
+		setBounds(0,0,track.getWidth(),track.getHeight());
 		panel.add(this);
 		
 		setIgnoreRepaint(true);
@@ -54,19 +54,17 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void gameLoop(){
-				
 		while(gameRunning){
 			
 			Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
 			
 			g.drawImage(track.getTrack(), null, 0, 0);
-			
 			/**
 			 * Draws a different car each time to test that they loaded correctly
 			 */
-			for(Driver drv: drivers){
-				g.drawImage(drv.getCar().getFace(), null, drv.getCar().getPosX(), drv.getCar().getPosY());
-			}
+//			for(Driver drv: drivers){
+//				g.drawImage(drv.getCar().getFace(), null, drv.getCar().getPosX(), drv.getCar().getPosY());
+//			}
 			
 			g.dispose();
 			strategy.show();
@@ -80,9 +78,9 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void run() {
-		for(Driver drv: drivers){
-			drv.start();
-		}
+//		for(Driver drv: drivers){
+//			drv.start();
+//		}
 		gameLoop();
 	}
 	

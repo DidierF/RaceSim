@@ -17,13 +17,7 @@ class Driver extends Thread{
 
 	public void run(){
 		car.changeDirection(Car.EAST);
-		int i = 0;
 		while(true){
-			if(i == 200){
-				turnLeft();
-				i = 0;
-			}
-			i++;
 			car.moveForward();
 			try {
 				sleep(20);

@@ -16,9 +16,6 @@ class Car{
 	private BufferedImage face;
 	private int direction = EAST;
 	private int[] position = {0,0}; //Car's current position.
-	//Use two set of corrdinates to represent front and
-	//rear position, useful for when turning.
-	//Use square to use for crash.
 	private double speed = 1; //Car's speed.
 	private int[][] bounds = new int[2][2];
 	public Car(String newFace, int x, int y){
