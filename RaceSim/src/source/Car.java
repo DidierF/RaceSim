@@ -1,22 +1,16 @@
 package source;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
 
-class Car extends JLabel{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	final private double weight; //Total car's weight //(Lbs).
-	final private int power; //Car's engine power //(HP).
-	final private double powerToWeight;
+class Car{
+	
+//	final private double weight; //Total car's weight //(Lbs).
+//	final private int power; //Car's engine power //(HP).
+//	final private double powerToWeight;
 	// weight and power affect how fast the car can accelerate.
 	// more weight slower acc, more power faster weight.	
 	final static int EAST = 0;
@@ -29,34 +23,39 @@ class Car extends JLabel{
 	private BufferedImage face;
 	private boolean deadEngine;
 	private int direction = EAST;
-	private int rpm;
-	private int redZone;
-	private double[] position = {0.0,0.0}; //Car's current position.
+//	private int rpm;
+//	private int redZone;
+	private int[] position = {0,0}; //Car's current position.
 	//Use two set of corrdinates to represent front and
 	//rear position, useful for when turning.
 	//Use square to use for crash.
-	private double speed; //Car's speed.
+	private double speed = 100; //Car's speed.
 	private int gear = 1; //Car's current gear.
 
 
-	public Car(String newFace, int power, double weight){
-		this.power = power;
-		this.weight = weight;
-		powerToWeight = power/weight;
+//	public Car(String newFace, int power, double weight){
+//		this.power = power;
+//		this.weight = weight;
+//		powerToWeight = power/weight;
+//		setFace(newFace);
+//	}
+	public Car(String newFace, int x, int y){
 		setFace(newFace);
+		position[0] = x;
+		position[y] = y;
 	}
 
-	public double getWeight(){
-		return weight;
-	}
-
-	public int getPower(){
-		return power;
-	}
-
-	public double getPtW(){
-		return powerToWeight;
-	}
+//	public double getWeight(){
+//		return weight;
+//	}
+//
+//	public int getPower(){
+//		return power;
+//	}
+//
+//	public double getPtW(){
+//		return powerToWeight;
+//	}
 
 	public double getSpeed(){
 		return speed;
@@ -66,9 +65,9 @@ class Car extends JLabel{
 		return gear;
 	}
 
-	public int getRPM(){
-		return rpm;
-	}
+//	public int getRPM(){
+//		return rpm;
+//	}
 
 	public int getDirection(){
 		return direction;
@@ -78,7 +77,7 @@ class Car extends JLabel{
 		return !deadEngine;
 	}
 
-	public Image getFace(){
+	public BufferedImage getFace(){
 		return face;
 	}
 
@@ -121,48 +120,51 @@ class Car extends JLabel{
 		//TODO: modify rpm
 		if(speed < TOP_SPEED){
 			speed += (0.5*gear);
-			rpm += (100/(gear));
+//			rpm += (100/(gear));
 		}
-		if(rpm >= MAX_RPM){
-			redZone++;
-			checkRedZone();
-		}
+//		if(rpm >= MAX_RPM){
+//			redZone++;
+//			checkRedZone();
+//		}
 	}
 
 
-	/* 	Downs the speed of the car.*/
+	/* 	Reduces the speed of the car.*/
 	public void speedDown(){
 		//TODO: refine this method. Simulate real car brake system.
 		if(speed > 0){
 			speed -= 4;
-			rpm -= 100 * gear;
+//			rpm -= 100 * gear;
 		}
 	}
 
-	public void gearUp(){
-		if(gear <= 6){
-			gear++;
-			rpm = 1000;
-			redZone = 0;
-		}
-	}
+//	public void gearUp(){
+//		if(gear <= 6){
+//			gear++;
+//			rpm = 1000;
+//			redZone = 0;
+//		}
+//	}
 
-	public void gearDown(){
-		if(gear > 1){
-			gear--;
-			rpm = 3500;
-			redZone = 0;
-		}
-	}
+//	public void gearDown(){
+//		if(gear > 1){
+//			gear--;
+//			rpm = 3500;
+//			redZone = 0;
+//		}
+//	}
 
-	private void checkRedZone(){
-		if(redZone == 100){
-			deadEngine = true;
-		}
+//	private void checkRedZone(){
+//		if(redZone == 100){
+//			deadEngine = true;
+//		}
+//	}
+	
+	public int getPosX(){
+		return position[0];
 	}
-
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.drawImage(face, 0, 0, this);
+	
+	public int getPosY(){
+		return position[1];
 	}
 }
