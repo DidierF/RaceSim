@@ -1,5 +1,6 @@
 package source;
 
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,18 +15,19 @@ class Car{
 	final static int SOUTH = 3;
 
 	private BufferedImage face;
-	private int direction = EAST;
-	private int[] position = {0,0}; //Car's current position.
+	private int direction = WEST;
+	private Point position = new Point(); //Car's current position.
 	private double speed = 1; //Car's speed.
+	
+	/** Minimum and maximum x and y coordinates of the car*/
 	private int topBound;
 	private int rightBound;
 	private int leftBound;
 	private int botBound;
 	
-	public Car(String newFace, int x, int y){
+	public Car(String newFace, Point p){
 		setFace(newFace);
-		position[0] = x;
-		position[1] = y;
+		position = p;
 		setBounds();
 	}
 
@@ -33,10 +35,10 @@ class Car{
 	 * 
 	 */
 	private void setBounds() {
-		leftBound = position[0];
-		rightBound = position[0] + face.getWidth();
-		topBound = position[1];
-		botBound = position[1] + face.getHeight();
+		leftBound = position.x;
+		rightBound = position.x + face.getWidth();
+		topBound = position.y;
+		botBound = position.y + face.getHeight();
 	}
 
 	public double getSpeed(){
@@ -70,26 +72,26 @@ class Car{
 	/* Moves the car in the direction it is facing speed/100 pixels.*/
 	public void moveForward(){
 		if(direction == EAST){
-			position[0] += speed;
+			position.x += speed;
 		}
 		else if(direction == WEST){
-			position[0] -= speed;
+			position.x -= speed;
 		}
 		else if(direction == NORTH){
-			position[1] -= speed;
+			position.y -= speed;
 		}
 		else {
-			position[1] += speed;
+			position.y += speed;
 		}
 		setBounds();
 	}
 
 	public int getPosX(){
-		return position[0];
+		return position.x;
 	}
 	
 	public int getPosY(){
-		return position[1];
+		return position.y;
 	}
 	
 	public int getTopBound(){

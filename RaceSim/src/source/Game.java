@@ -3,6 +3,7 @@ package source;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 
@@ -18,8 +19,6 @@ public class Game extends Canvas implements Runnable{
 	private boolean gameRunning = true;
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private Track track = new Track("src/source/Pictures/PistaRectangular_4.jpg", new Dimension(670, 550), new Dimension(460, 390));
-	private int startX = 700;
-	private int startY = 600;
 	
 	public Game(){
 		JFrame container = new JFrame();
@@ -44,13 +43,14 @@ public class Game extends Canvas implements Runnable{
 	
 	private void setupGame(){
 		String carLoc = "src/source/Pictures/carro2.gif";
-		Driver drv = new Driver(new Car(carLoc, startX, startY), track);
-		drivers.add(drv);
-//		for(int i = 1; i <= 10; i++){
-//			carLoc = "src/source/Pictures/carro" + i + ".gif";
-//			drv = new Driver(new Car(carLoc, startX, startY), track);
-//			drivers.add(drv);
-//		}
+		Driver drv = new Driver(new Car(carLoc, new Point()), track);
+		int carNum = 10;
+		track.setStartingPos(carNum, new Dimension(drv.getCar().getFace().getWidth(), drv.getCar().getFace().getHeight()), 400);
+		for(int i = 1; i <= carNum; i++){
+			carLoc = "src/source/Pictures/carro" + i + ".gif";
+			drv = new Driver(new Car(carLoc, track.getStartingPos(i-1)), track);
+			drivers.add(drv);
+		}
 	}
 	
 	public void gameLoop(){
@@ -59,9 +59,7 @@ public class Game extends Canvas implements Runnable{
 			Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
 			
 			g.drawImage(track.getTrack(), null, 0, 0);
-			/**
-			 * Draws a different car each time to test that they loaded correctly
-			 */
+			
 			for(Driver drv: drivers){
 				g.drawImage(drv.getCar().getFace(), null, drv.getCar().getPosX(), drv.getCar().getPosY());
 			}

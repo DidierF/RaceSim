@@ -17,7 +17,7 @@ class Driver extends Thread{
 	}
 
 	public void run(){
-		car.changeDirection(Car.EAST);
+		car.changeDirection(Car.WEST);
 		while(true){
 			checkForTurn();
 			car.moveForward();
