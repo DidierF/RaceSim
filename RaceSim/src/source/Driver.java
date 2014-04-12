@@ -7,9 +7,15 @@ class Driver extends Thread{
 	
 	private final Track TRACK;
 	
-	public Driver(Car newCar, Track t){
+	int laps;
+	
+	int startX = 0;
+	
+	public Driver(Car newCar, Track t, int laps){
 		car = newCar;
 		TRACK = t;
+		startX = newCar.getPosX();
+		this.laps = laps;
 	}
 
 	public Car getCar(){
@@ -18,13 +24,16 @@ class Driver extends Thread{
 
 	public void run(){
 		car.changeDirection(Car.WEST);
-		while(true){
+		while(laps > 0){
 			checkForTurn();
 			car.moveForward();
 			try {
-				sleep(10);
+				sleep(45);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+			}
+			if(car.getPosX() == startX && car.getPosY() <= TRACK.getInBound().getMinY()){
+				laps--;
 			}
 		}
 	}

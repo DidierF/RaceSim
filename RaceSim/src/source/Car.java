@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.String;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -26,12 +26,15 @@ class Car{
 	private int rightBound;
 	private int leftBound;
 	private int botBound;
+	Random r = new Random();
 	
 	public Car(String newFace, Point p){
+		r.setSeed(System.currentTimeMillis());
 		tempFace = newFace;
 		setFace(newFace);
 		position = p;
 		setBounds();
+		speed = r.nextInt(10);
 	}
 
 	/**
@@ -120,7 +123,7 @@ class Car{
 		}
 		setBounds();
 	}
-
+	
 	public int getPosX(){
 		return position.x;
 	}

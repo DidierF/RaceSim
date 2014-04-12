@@ -19,6 +19,8 @@ public class Game extends Canvas implements Runnable{
 	private boolean gameRunning = true;
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private Track track = new Track("src/source/Pictures/PistaRectangular_4.jpg", new Dimension(670, 550), new Dimension(460, 390));
+	int laps = 10;
+	
 	
 	public Game(){
 		JFrame container = new JFrame();
@@ -43,12 +45,12 @@ public class Game extends Canvas implements Runnable{
 	
 	private void setupGame(){
 		String carLoc = "src/source/Pictures/carro2.gif";
-		Driver drv = new Driver(new Car(carLoc, new Point()), track);
+		Driver drv = new Driver(new Car(carLoc, new Point()), track, laps);
 		int carNum = 10;
 		track.setStartingPos(carNum, new Dimension(drv.getCar().getFace().getWidth(), drv.getCar().getFace().getHeight()), 400);
 		for(int i = 1; i <= carNum; i++){
 			carLoc = "src/source/Pictures/carro" + i + ".gif";
-			drv = new Driver(new Car(carLoc, track.getStartingPos(i-1)), track);
+			drv = new Driver(new Car(carLoc, track.getStartingPos(i-1)), track, laps);
 			drivers.add(drv);
 		}
 	}
